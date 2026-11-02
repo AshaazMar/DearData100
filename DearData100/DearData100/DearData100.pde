@@ -2,25 +2,25 @@ Table dataTable;
 
 void setup() {
   size(400, 400);
-  background(255);
-  
+  // Load the dataset
   dataTable = loadTable("data.csv", "header");
-  
-  if (dataTable != null) {
-    println("Rows loaded: " + dataTable.getRowCount());
-  } else {
-    println("Error: 'data.csv' not found in data folder");
-  }
-  
-  int targetCount = 100;
-  int currentCount = (dataTable != null) ? dataTable.getRowCount() : 42;
-  int remaining = calculateItemsNeeded(targetCount, currentCount);
-  
-  println("Current data count: " + currentCount);
-  println("Needed for 100: " + remaining);
 }
 
 void draw() {
+  background(255); 
+  fill(0);         
+  textSize(22);
+  textAlign(CENTER, CENTER);
+  
+  if (dataTable != null) {
+    int currentCount = dataTable.getRowCount();
+    int remaining = calculateItemsNeeded(100, currentCount);
+    
+    text("Total Rows Tracked: " + currentCount, width/2, height/2 - 20);
+    text("Remaining to 100: " + remaining, width/2, height/2 + 20);
+  } else {
+    text("Error: data.csv not found", width/2, height/2);
+  }
 }
 
 int calculateItemsNeeded(int goal, int currentCount) {
