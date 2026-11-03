@@ -1,32 +1,23 @@
-Table dataTable;
-
 void setup() {
   size(400, 400);
-  // Load the dataset
-  dataTable = loadTable("data.csv", "header");
 }
 
 void draw() {
-  background(255); 
-  fill(0);         
-  textSize(22);
-  textAlign(CENTER, CENTER);
+  background(255);
   
-  if (dataTable != null) {
-    int currentCount = dataTable.getRowCount();
-    int remaining = calculateItemsNeeded(100, currentCount);
-    
-    text("Total Rows Tracked: " + currentCount, width/2, height/2 - 20);
-    text("Remaining to 100: " + remaining, width/2, height/2 + 20);
-  } else {
-    text("Error: data.csv not found", width/2, height/2);
-  }
+  drawTarget(100, 100, 80);
+  drawTarget(300, 200, 150);
+  drawTarget(200, 320, 100);
 }
 
-int calculateItemsNeeded(int goal, int currentCount) {
-  int needed = goal - currentCount;
-  if (needed < 0) {
-    return 0;
-  }
-  return needed;
+void drawTarget(int x, int y, int size) {
+  
+  fill(0);
+  ellipse(x, y, size, size);
+  
+  fill(255);
+  ellipse(x, y, size / 2, size / 2);
+
+  fill(0);
+  ellipse(x, y, size / 4, size / 4);
 }
